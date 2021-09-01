@@ -1,6 +1,9 @@
 package com.qin.entity;
 
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import java.util.Date;
 
@@ -8,16 +11,9 @@ import java.util.Date;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class User {
-
+public class Category {
     private Integer id;
     private String name;
-    private String password;
     private boolean isExit;
     private Date createTime;
-
-    public User(String name, String password){
-        this.name = name;
-        this.password = password;
-    }
 }

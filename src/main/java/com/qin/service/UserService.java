@@ -14,4 +14,12 @@ public class UserService {
     public User getUserById(Integer id){
         return userDao.getUserById(id);
     }
+
+    public User getUserByName(String name){
+        return userDao.getUserByName(name);
+    }
+
+    public int insertUser(User user){
+        return userDao.insertUser(user);
+    }
 }

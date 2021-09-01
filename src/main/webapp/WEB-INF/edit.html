@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>编写</title>
+    <!-- 引入bootstrap -->
+    <link rel="stylesheet" href="bootstrap/bootstrap.css">
+    <!-- 引入bootstrap头像库 -->
+    <link rel="stylesheet" href="bootstrap/bootstrap-icons.css">
+    <script type="text/javascript" src="jquery/jquery.js"></script>
+    <script type="text/javascript" src="bootstrap/bootstrap.js"></script>
+    <script type="text/javascript" src="bootstrap/bootstrap.bundle.js"></script> 
+    <script type="text/javascript" src="showdown/showdown.js"></script>
+</head>
+<body>
+    <!-- 得输入标题 -->
+    <input class="form-control mt-1" type="text" placeholder="请输入博客的标题">
+
+    <!-- 两个按钮，从左往右依次是发布、预览 -->
+    <div class="d-flex justify-content-end px-2 py-3">
+        <button type="button" class="btn btn-secondary" id="m_render">预览</button>
+        <button type="button" class="btn btn-light ms-2" id="send">发布</button>
+    </div>
+    <!-- 输入内容 -->
+    <textarea id="content" class="form-control" placeholder="编写内容处（使用makedown语法）......"></textarea>
+    <div id="out" class="mx-auto" style="display: none;"></div>
+    
+    <script type="text/javascript" src="js/edit.js"></script>
+</body>
+</html>

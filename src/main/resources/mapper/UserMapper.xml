@@ -3,10 +3,19 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.qin.dao.UserDao">
+    <insert id="insertUser" parameterType="com.qin.entity.User" useGeneratedKeys="true" keyProperty="id">
+        insert into user (name, password) values ( #{name},#{password});
+    </insert>
+
     <select id="getUserById" resultType="com.qin.entity.User">
-        select * from user where id = #{id}
+        select * from user where id = #{id} and is_exit = 1
     </select>
     <select id="getUsers" resultType="com.qin.entity.User">
-        select * from user
+        select * from user where is_exit = 1
     </select>
+
+    <select id="getUserByName" parameterType="string" resultType="com.qin.entity.User">
+        select * from user where name = #{name} and is_exit = 1
+    </select>
+
 </mapper>
