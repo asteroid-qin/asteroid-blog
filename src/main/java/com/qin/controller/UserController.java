@@ -3,6 +3,7 @@ package com.qin.controller;
 import com.qin.entity.R;
 import com.qin.entity.User;
 import com.qin.service.UserService;
+import com.sun.istack.internal.logging.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.DigestUtils;
@@ -10,12 +11,14 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletResponse;
+import java.util.logging.Level;
 
 @Controller
 public class UserController {
 
     @Autowired
     private UserService userService;
+    final Logger logger = Logger.getLogger(UserController.class);
 
     @RequestMapping(value = "/user", method = RequestMethod.POST)
     @ResponseBody
@@ -27,8 +30,9 @@ public class UserController {
         User user = userService.getUserByName(name);
 
         // 如果用户存在且密码错误
-        if(null != user && user.getPassword().equals(pwd)){
+        if(null != user && !user.getPassword().equals(pwd)){
             // 登录失败，需要提示信息
+            logger.log(Level.INFO, "用户"+ name +"密码"+ pwd +"，登录失败！");
             return R.no("登录失败！密码错误！", null);
         }
 
@@ -38,12 +42,13 @@ public class UserController {
         // 存在需要比对密码
         if(null != user){
             // 登录成功,设置用户名id和名字
+            logger.log(Level.INFO, "用户"+ name + "登录成功！");
             digit = DigestUtils.md5DigestAsHex(user.getId().toString().getBytes());
         }else{
             // 不存在则直接创建
             User u2 = new User(name, pwd);
             userService.insertUser(u2);
-
+            logger.log(Level.INFO, "用户"+ name +"已经注册！");
             digit = DigestUtils.md5DigestAsHex(u2.getId().toString().getBytes());
         }
 
@@ -59,9 +64,10 @@ public class UserController {
 
     @RequestMapping("/exit")
     public String exit(HttpServletResponse response){
+        logger.log(Level.INFO, "删除用户");
         // 删除cookie
         response.addCookie(new Cookie("name",""));
         response.addCookie(new Cookie("digit",""));
-        return "redirect:/index";
+        return "redirect:/";
     }
 }

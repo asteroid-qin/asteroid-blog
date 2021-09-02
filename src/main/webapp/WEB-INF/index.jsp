@@ -17,20 +17,22 @@
     <script type="text/javascript" src="jquery/jquery.js"></script>
     <script type="text/javascript" src="bootstrap/bootstrap.js"></script>
     <script type="text/javascript" src="bootstrap/bootstrap.bundle.js"></script>
+    <!-- top导航栏css -->
+    <link rel="stylesheet" href="css/top.css">
 </head>
 <body>
     <!-- 导航栏 -->
     <nav class="navbar navbar-expand-lg navbar-light bg-light mb-2">
         <div class="container-fluid">
-          <a class="navbar-brand" href="#">小行星博客</a>
+          <a class="navbar-brand" href="">小行星博客</a>
           <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
           </button>
           <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                 <li class="nav-item" data-bs-toggle="modal" data-bs-target="#login" id="login_but" style="cursor: pointer">登录/注册</li>
-                <li class="nav-item" style="display: none" id="user_name"></li>
-                <li class="nav-item ms-2" style="display: none" id="write_blog">写博客</li>
+                <a href="home" class="ms-2" style="display: none" id="user_name"></a>
+                <a href="edit" class="ms-2" style="display: none" target="_blank" id="write_blog">写博客</a>
                 <a href="exit" class="ms-2" style="display: none" id="user_exit">退出</a>
             </ul>
             <form class="d-flex">

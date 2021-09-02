@@ -36,6 +36,47 @@ $('#m_render').on('click',function(){
 
 // 添加点击事件，将out中内容发送
 $('#send').on('click', ()=>{
-    const res = $('#out').html()
-    console.log(res);
+    $.post(
+        "blog",
+        {   "_method":"PUT",
+            "title":$('#title').val(),
+            "category_id":$('#category option:selected').attr('idx'),
+            "content":$('#content').val()
+        },
+        function (res){
+            // 拿到格式化后的时间
+            let now = new Date();
+            let time = now.getHours()+':'
+            time += (now.getMinutes() > 9)?now.getMinutes():'0'+now.getMinutes()
+            time += ':'
+            time += (now.getSeconds() > 9)?now.getSeconds():'0'+now.getSeconds()
+
+            // 更新日期
+            $('.toast-header > small').text(time)
+            // 更新消息
+            $('.toast-body').text(res.message)
+            console.log(res)
+            // 让toast显示
+            $('.toast').toast('show');
+        },"json"
+    )
+})
+
+
+$(()=>{
+    // 添加多选分类
+    $.get(
+        'categories',
+        1,
+        function (res){
+            // 为多选框中生成所有
+            $(res.data).each(function (){
+                let sel = '<option idx="'+ this.id + '">' + this.name + '</option>'
+                $('#category').append(sel)
+            })
+            // 让第一个元素select
+            $('#category > option').first().attr("selected","selected")
+        }
+    )
+
 })
