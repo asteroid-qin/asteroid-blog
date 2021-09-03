@@ -11,11 +11,11 @@
         select * from user where id = #{id} and is_exit = 1
     </select>
     <select id="getUsers" resultType="com.qin.entity.User">
-        select * from user where is_exit = 1
+        select * from user where is_exit = 1 order by id
     </select>
 
     <select id="getUserByName" parameterType="string" resultType="com.qin.entity.User">
-        select * from user where name = #{name} and is_exit = 1
+        select * from user where name = #{name} and is_exit = 1 order by id
     </select>
 
 </mapper>

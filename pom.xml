@@ -115,7 +115,12 @@
       <artifactId>jackson-databind</artifactId>
       <version>2.11.3</version>
     </dependency>
-
+    <!-- makedown转html -->
+    <dependency>
+      <groupId>com.vladsch.flexmark</groupId>
+      <artifactId>flexmark-all</artifactId>
+      <version>0.50.42</version>
+    </dependency>
     <!-- 导入测试 -->
     <dependency>
       <groupId>org.springframework</groupId>

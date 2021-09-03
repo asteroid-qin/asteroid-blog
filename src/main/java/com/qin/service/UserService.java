@@ -22,4 +22,5 @@ public class UserService {
     public int insertUser(User user){
         return userDao.insertUser(user);
     }
+
 }

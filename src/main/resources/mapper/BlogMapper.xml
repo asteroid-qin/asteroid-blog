@@ -8,4 +8,21 @@
         insert into blog (title, author_id, category_id, content)
             values (#{title} ,#{authorId}, #{categoryId}, #{content})
     </insert>
+
+    <select id="getPageBlogsByAllCategoryNew" resultType="com.qin.entity.Blog">
+        select * from blog where is_exit = 1 order by create_time desc limit #{start},#{size}
+    </select>
+
+    <select id="getPageBlogsByCategoryNew" resultType="com.qin.entity.Blog">
+        select * from blog where category_id = #{categoryId} and is_exit = 1
+            order by create_time desc limit #{start},#{size}
+    </select>
+
+    <select id="getBlogsByALLCategory" resultType="java.lang.Integer">
+        select count(*) from blog where is_exit = 1
+    </select>
+
+    <select id="getBlogsByCategory" resultType="java.lang.Integer">
+        select count(*) from blog where is_exit = 1 and category_id = #{categoryId}
+    </select>
 </mapper>

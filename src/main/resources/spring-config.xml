@@ -29,4 +29,7 @@
         <property name="basePackage" value="com.qin.dao"></property>
     </bean>
     <!-- 事务管理器 -->
+
+    <!-- 配置makedown 解析器 -->
+    <bean id="options" class="com.vladsch.flexmark.util.data.MutableDataSet"></bean>
 </beans>

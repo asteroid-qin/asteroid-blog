@@ -19,6 +19,11 @@
     <script type="text/javascript" src="bootstrap/bootstrap.bundle.js"></script>
     <!-- top导航栏css -->
     <link rel="stylesheet" href="css/top.css">
+    <style>
+        .pagination > li:not(.disabled) {
+            cursor: pointer;
+        }
+    </style>
 </head>
 <body>
     <!-- 导航栏 -->
@@ -46,24 +51,23 @@
     <!-- 分类筛选 -->
     <div class="container">
         <div class="row">
-            <div class="col-2 list-group" id="category">
+            <div class="col-2 list-group" id="category"></div>
+            <div class="col-8" id="blog"></div>
+            <div class="col-8 offset-2">
+                <nav class="mt-2" aria-label="...">
+                    <ul class="pagination justify-content-end">
+                        <li class="page-item">
+                            <span class="page-link">Previous</span>
+                        </li>
+                        <li class="page-item active" style="cursor: default">
+                            <span class="page-link" id="cur_page">1</span>
+                        </li>
+                        <li class="page-item">
+                            <span class="page-link">Next</span>
+                        </li>
+                    </ul>
+                </nav>
             </div>
-            <div class="col-8">
-                <div class="px-3 py-2 border-bottom">
-                    <div>
-                        <div class="d-flex w-100 justify-content-between">
-                            <h5 class="mb-1 text-truncate">这是标题这是标题这是标题这是标题这是标题这是标题这是标题</h5>
-                            <small>2012/8/10</small>
-                        </div>
-                        <p class="mb-1 text-truncate">你好啊你好啊你好啊你好啊你好啊你好啊你好啊你好啊你好啊你好啊你好啊你好啊你好啊你好啊你好啊你好啊你好啊你好啊你好啊你好啊你好啊你好啊你好啊你好啊你好啊你好啊你好啊你好啊你好啊你好啊你好啊你好啊你好啊你好啊你好啊你好啊你好啊你好啊你好啊你好啊你好啊你好啊你好啊你好啊你好啊你好啊你好啊你好啊你好啊你好啊你好啊你好啊你好啊你好啊你好啊你好啊你好啊你好啊你好啊你好啊你好啊你好啊你好啊你好啊你好啊你好啊你好啊你好啊你好啊你好啊你好啊</p>
-
-                    </div>
-                    <small class="me-4">用户id用户id用户id用户id</small>
-                    <small class="me-2"><i class="bi bi-hand-thumbs-up pe-2"></i>0</small>
-                    <small class="me-2"><i class="bi bi-chat-square-dots pe-2"></i>12</small>
-                    <small><i class="bi bi-eye pe-2"></i>13</small>
-                </div>
-            </div>       
         </div>
     </div>
     
