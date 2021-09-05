@@ -8,7 +8,7 @@
     </select>
 
     <select id="getCategoryById" resultType="com.qin.entity.Category">
-        select * from category where id = #{id} is_exit = 1
+        select * from category where id = #{id} and is_exit = 1
     </select>
 
 </mapper>

@@ -1,0 +1,29 @@
+#author{
+    color: black;
+    text-decoration-line: none;
+}
+#author:hover{
+    text-decoration-line: underline;
+}
+#comment a{
+    text-decoration: none;
+}
+.replay-list{
+    margin-left: 50px;
+}
+.m_small{
+    font-size: 12px;
+}
+.m_user{
+    color: rgba(0, 0, 0, 0.7);
+}
+.sender:hover{
+    color: tomato;
+}
+.replay-btn{
+    color: rgba(0, 0, 204, 0.6);
+}
+.replay-btn:hover{
+    color: tomato;
+    cursor: pointer;
+}

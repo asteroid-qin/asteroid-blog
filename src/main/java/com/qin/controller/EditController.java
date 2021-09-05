@@ -76,7 +76,7 @@ public class EditController {
 
             List<Blog> blogs;
             // 开始分页查询
-            if(categoryId == 1){
+            if(categoryId == -1){
                 blogs = blogService.getPageBlogsByAllCategory(start, size);
             }else{
                 blogs = blogService.getPageBlogsByCategory(start, categoryId, size);
@@ -105,28 +105,15 @@ public class EditController {
                     @RequestParam("category_id")String categoryId,
                     @RequestParam("content")String content,
                     HttpServletRequest request){
-        // 取出当前id，查询用户后判断两个id是否相等
-        Cookie[] cookies = request.getCookies();
-        String name = "", digitId = "";
-        for (Cookie cookie: cookies) {
-            if("digit".equals(cookie.getName())){
-                digitId = cookie.getValue();
-            }else if("name".equals(cookie.getName())){
-                name = cookie.getValue();
-            }
+        String name = userService.getUser(request);
+        if(StringUtils.isEmpty(name)){
+            return R.no("用户不合法！", null);
         }
-        if(StringUtils.isEmpty(name) || StringUtils.isEmpty(digitId) || !StringUtils.isNumber(categoryId)){
-            // 没有用户名或者加密id，失败
-            return R.no("cookie中查无此人！", null);
+        if(!StringUtils.isNumber(categoryId)){
+            return R.no("分类名不合法！", null);
         }
 
         User user = userService.getUserByName(name);
-        if(user == null){
-            return R.no("数据库中查无此人！", null);
-        }
-        if(!digitId.equals(DigestUtils.md5DigestAsHex(user.getId().toString().getBytes()))){
-            return R.no("认证id错误！！", null);
-        }
 
         // 确认完成后，开始往数据库中添加blog
         Blog blog = new Blog();
@@ -150,7 +137,7 @@ public class EditController {
         Integer categoryId = Integer.parseInt(_categoryId);
         int count;
 
-        if(categoryId == 1){
+        if(categoryId == -1){
             count = blogService.getBlogsByALLCategory();
         }else{
             count = blogService.getBlogsByCategory(categoryId);

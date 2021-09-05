@@ -16,4 +16,8 @@ public interface BlogDao {
     int getBlogsByALLCategory();
 
     int getBlogsByCategory(Integer categoryId);
+
+    Blog getBlogsById(Integer id);
+
+    int getCountBlogById(Integer id);
 }

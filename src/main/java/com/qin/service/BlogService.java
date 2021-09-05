@@ -38,4 +38,12 @@ public class BlogService {
     public int getBlogsByCategory(Integer categoryId){
         return blogDao.getBlogsByCategory(categoryId);
     }
+
+    public Blog getBlogsById(Integer id) {
+        return blogDao.getBlogsById(id);
+    }
+
+    public int getCountBlogById(Integer id){
+        return blogDao.getCountBlogById(id);
+    }
 }

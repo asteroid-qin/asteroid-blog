@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.qin.dao.CommentDao">
+    <insert id="insert" parameterType="com.qin.entity.Comment">
+        insert into comment (blog_id, comment_id, sender_id, receiver_name, idx, content)
+            values (#{blogId}, #{commentId}, #{senderId}, #{receiverName}, #{idx}, #{content})
+    </insert>
+
+    <select id="getRank1CommentByBlogIdDesc" resultType="com.qin.entity.Comment">
+        select * from comment where is_exit = 1 and idx = 1 and blog_id = #{blogId}
+            ORDER BY create_time DESC
+    </select>
+
+    <select id="getRank2CommentByCIdDesc" resultType="com.qin.entity.Comment">
+        select * from comment where is_exit = 1 and idx = 2 and comment_id = #{commentId}
+            ORDER BY create_time DESC
+    </select>
+    <select id="getCommentById" resultType="com.qin.entity.Comment">
+        select * from comment where is_exit = 1 and id = #{id}
+    </select>
+</mapper>

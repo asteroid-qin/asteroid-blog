@@ -1,0 +1,10 @@
+.pagination > li:not(.disabled) {
+    cursor: pointer;
+}
+#blog a{
+    color: black;
+    text-decoration-line: none;
+}
+#blog a:hover{
+    text-decoration-line: underline;
+}

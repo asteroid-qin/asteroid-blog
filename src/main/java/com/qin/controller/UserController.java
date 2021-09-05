@@ -1,5 +1,6 @@
 package com.qin.controller;
 
+import com.alibaba.druid.util.StringUtils;
 import com.qin.entity.R;
 import com.qin.entity.User;
 import com.qin.service.UserService;
@@ -10,6 +11,7 @@ import org.springframework.util.DigestUtils;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.util.logging.Level;
 
@@ -70,4 +72,6 @@ public class UserController {
         response.addCookie(new Cookie("digit",""));
         return "redirect:/";
     }
+
+
 }

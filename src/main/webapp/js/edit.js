@@ -1,8 +1,5 @@
 // 自动让textarea铺满屏幕
-$('#content').css("height", $(window).height() -  $('#content').offset().top + "px");
-// 设置out的宽度为浏览器的2/3
-$('#out').css("width", $(window).width() * 2 / 3 + 'px')
-console.log($(window).height());
+$('#content').css("height", $(window).height() -  $('#content').offset().top + "px")
 
 // 准备全局变量
 let converter = new showdown.Converter()

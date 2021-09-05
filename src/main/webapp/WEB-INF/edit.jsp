@@ -9,6 +9,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>编写</title>
     <base href="<%=url%>">
+    <link href="favicon.ico" rel="shortcut icon">
     <!-- 引入bootstrap -->
     <link rel="stylesheet" href="bootstrap/bootstrap.css">
     <!-- 引入bootstrap头像库 -->
@@ -18,7 +19,7 @@
     <script type="text/javascript" src="bootstrap/bootstrap.bundle.js"></script>
     <script type="text/javascript" src="showdown/showdown.js"></script>
     <style>
-        .toast-container{
+        .toast{
             position: fixed;
             right: 0;
             top: 20%;
@@ -59,7 +60,11 @@
 
     <!-- 输入内容 -->
     <textarea id="content" class="form-control" placeholder="编写内容处（使用makedown语法）......"></textarea>
-    <div id="out" class="mx-auto" style="display: none;"></div>
+    <div class="container-fluid">
+        <div class="row">
+            <div id="out" class="col-md-8 col-sm-10 mx-auto" style="display: none;"></div>
+        </div>
+    </div>
     <script type="text/javascript" src="js/edit.js"></script>
 </body>
 </html>

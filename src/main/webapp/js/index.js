@@ -21,19 +21,21 @@ function renderBlog(start, categoryId, size){
             $('#blog').empty()
             console.log(res)
 
-            let str1 = '<div class="px-3 py-2 border-bottom"><div><div class="d-flex w-100 justify-content-between"><a href="#" class="mb-1 text-truncate h5">'
+            let str1 = '<div class="px-3 py-2 border-bottom"><div><div class="d-flex w-100 justify-content-between"><a href="'
+            // 拼接id
+            let str2 = '" class="mb-1 text-truncate h5">'
             // 拼接标题
-            let str2 = '</a><small>'
+            let str3 = '</a><small>'
             // 拼接时间
-            let str3 = '</small></div><p class="mb-1 text-truncate">'
+            let str4 = '</small></div><p class="mb-1 text-truncate">'
             // 拼接描述
-            let str4 = '</p></div><small class="me-4">'
+            let str5 = '</p></div><small class="me-4">'
             // 拼接用户名
-            let str5 = '</small><small class="me-2"><i class="bi bi-hand-thumbs-up pe-2"></i>0</small><small class="me-2"><i class="bi bi-chat-square-dots pe-2"></i>12</small><small><i class="bi bi-eye pe-2"></i>13</small></div>'
+            let str6 = '</small><small class="me-2"><i class="bi bi-hand-thumbs-up pe-2"></i>0</small><small class="me-2"><i class="bi bi-chat-square-dots pe-2"></i>12</small><small><i class="bi bi-eye pe-2"></i>13</small></div>'
 
             // 渲染数据, 往盒子里面添加数据
             $(res.data).each(function (){
-                $('#blog').append(str1+this.title+str2+this.createTime+str3+this.description+str4+this.authorName+str5)
+                $('#blog').append(str1+'blog/'+this.id+str2+this.title+str3+this.createTime+str4+this.description+str5+this.authorName+str6)
             })
         }
     )
@@ -74,9 +76,9 @@ function renderPagination(categoryId){
 
 $(()=>{
     // 查出所有的博客，以分页方式
-    renderBlog(0, 1, PAGE_SIZE)
+    renderBlog(0, -1, PAGE_SIZE)
     // 渲染页面,默认查所有分类
-    renderPagination(1)
+    renderPagination(-1)
 
     // index页面加载时，查询数据库所有的分类并且展示
     $.getJSON(

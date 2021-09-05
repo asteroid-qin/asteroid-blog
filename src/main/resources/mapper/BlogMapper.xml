@@ -25,4 +25,13 @@
     <select id="getBlogsByCategory" resultType="java.lang.Integer">
         select count(*) from blog where is_exit = 1 and category_id = #{categoryId}
     </select>
+
+    <select id="getBlogsById" resultType="com.qin.entity.Blog">
+        select * from blog where id = #{id} and is_exit = 1
+    </select>
+
+    <select id="getCountBlogById" resultType="java.lang.Integer">
+        select count(*) from blog where id = #{id} and is_exit = 1
+    </select>
+
 </mapper>
