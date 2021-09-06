@@ -52,12 +52,9 @@ public class CommentController {
         }
 
         User user = userService.getUserByName(name);
-        if(StringUtils.isNumber(_id) && StringUtils.isNumber(_idx)
-                && StringUtils.isNumber(_commentId)){
+        if(StringUtils.isNumber(_id) && StringUtils.isNumber(_idx)){
             int blogId = Integer.parseInt(_id);
             int idx = Integer.parseInt(_idx);
-            int commentId = Integer.parseInt(_commentId);
-
 
             Comment comment = new Comment();
             comment.setBlogId(blogId);
@@ -66,7 +63,8 @@ public class CommentController {
             comment.setSenderId(user.getId());
             comment.setIdx(idx);
 
-            if(idx == 2){
+            if(idx == 2 && StringUtils.isNumber(_commentId)){
+                int commentId = Integer.parseInt(_commentId);
                 Comment commentById = commentService.getCommentById(commentId);
                 User userById = userService.getUserById(commentById.getSenderId());
 

@@ -6,6 +6,8 @@ function getCategoryId(){
 
 let id = getCategoryId()
 let converter = new showdown.Converter()
+
+// 渲染页面博客
 $.getJSON(
     'blog',
     {"id":id},
@@ -78,8 +80,9 @@ function render_comment(){
         'blog/comment/' + id,
         1,
         function(res){
-            // 清空
-            $('#comment').empty()
+            // 清空，清空前把评论框移出去并隐藏
+            $('#comment_card').hide()
+            $('#comment').after($('#comment_card')).empty()
 
             // 根据博客id查到对应所有的评论
             if(!res.data){
@@ -168,6 +171,19 @@ function render_comment(){
     )
 }
 
+// 发送一级评论按钮（因为要解绑和绑定，所以需要抽取成一个函数
+function sender_comment_btn(){
+    const content = $('#comment_content_top').val()
+    if(content.length <= 0){
+        // 弹出不允许评论内容为空
+        return
+
+    }
+    // 发送评论前清空内容
+    $('#comment_content_top').val('')
+    sender_comment(1, content,"")
+}
+
 // 给一级评论添加特殊样式
 function render_comment_top(){
     // 移除row
@@ -182,12 +198,12 @@ function render_comment_top(){
     $('#comment_bot > button').removeClass("btn-secondary").addClass("btn-danger")
     // 获取焦点
     $('#comment_content_top').focus()
-
     // 给计算剩余字符添加事件
     $('#comment_content_top').on('keydown', calculate_remainder).on('keyup', calculate_remainder)
     // 给发送评论添加事件
-
+    $('#comment_top button').on('click', sender_comment_btn)
 }
+
 
 // 自动查出当前博客的评论
 $(()=>{
@@ -228,16 +244,13 @@ $(()=>{
             $('#comment_top').one('click', render_comment_top)
             // 去除事件
             $('#comment_content_top').off()
-
+            // 去除发送评论
+            $('#comment_top button').off('click')
         }
     });
 
-    // 发送评论功能
-    $('#comment_top button').on('click', sender_comment)
-
     // 发送二级评论
     $('#comment_card button').on('click', function (){
-        console.log(666)
         const content = $('#comment_content').val()
         if(content.length <= 0){
             // 弹出不允许评论内容为空

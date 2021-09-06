@@ -29,7 +29,6 @@ public class BlogVOWIndex {
         authorId = blog.getAuthorId();
         content = blog.getContent();
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy.MM.dd");
-        dateFormat.setTimeZone(TimeZone.getTimeZone("GMT+8:00"));
         createTime = dateFormat.format(blog.getCreateTime());
     }
 }

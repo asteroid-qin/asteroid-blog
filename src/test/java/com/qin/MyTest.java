@@ -17,6 +17,7 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import javax.sql.DataSource;
+
 import java.sql.SQLException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -33,19 +34,16 @@ public class MyTest {
     private BlogService blogService;
     @Autowired
     private MutableDataSet options;
-
     @Autowired
     private CommentService commentService;
 
     @Test
     public void test4(){
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy.MM.dd hh:mm  Z");
-        User user = userDao.getUserById(1);
+        User user = userDao.getUserById(15);
+
         Date time = user.getCreateTime();
-        dateFormat.setTimeZone(TimeZone.getTimeZone("Asia/Shanghai"));
-        System.out.println( dateFormat.format(time));
-        dateFormat.setTimeZone(TimeZone.getTimeZone("GMT+8"));
-        System.out.println( dateFormat.format(time));
+        System.out.println(dateFormat.format(time));
     }
 
     @Test

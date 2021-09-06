@@ -39,8 +39,7 @@ public class CommentVO {
         isExit = comment.getIsExit();
 
         // 方便前端，对日期进行转换
-        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy.MM.dd hh:mm");
-        dateFormat.setTimeZone(TimeZone.getTimeZone("GMT+8:00"));
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy.MM.dd HH:mm");
         createTime = dateFormat.format(comment.getCreateTime());
     }
 }

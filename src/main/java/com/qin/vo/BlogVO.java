@@ -28,7 +28,6 @@ public class BlogVO {
         isExit = blog.getIsExit();
         // 方便前端，对日期进行转换
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy.MM.dd");
-        dateFormat.setTimeZone(TimeZone.getTimeZone("GMT+8:00"));
         createTime = dateFormat.format(blog.getCreateTime());
     }
 }
