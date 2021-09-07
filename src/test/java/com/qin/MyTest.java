@@ -1,5 +1,7 @@
 package com.qin;
 
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import com.qin.dao.UserDao;
 import com.qin.entity.Blog;
 import com.qin.entity.User;
@@ -36,6 +38,30 @@ public class MyTest {
     private MutableDataSet options;
     @Autowired
     private CommentService commentService;
+
+    @Test
+    public void test6(){
+        System.out.println("你好".length());
+        System.out.println("nh".length());
+    }
+
+    @Test
+    public void test5(){
+        // 使用helpPage插件
+        PageHelper.startPage(2, 5);
+        List<Blog> blogs = blogService.getBlogs();
+
+        PageInfo<Blog> list = new PageInfo<>(blogs);
+
+        System.out.println(list.getPageNum());
+        System.out.println(list.getPages());
+        System.out.println(list.getTotal());
+        System.out.println(list.getSize());
+        System.out.println(list.getPrePage());
+        System.out.println(list.getNextPage());
+
+        blogs.forEach(System.out::println);
+    }
 
     @Test
     public void test4(){

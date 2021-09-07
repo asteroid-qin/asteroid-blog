@@ -1,5 +1,6 @@
 package com.qin.service;
 
+import com.alibaba.druid.util.StringUtils;
 import com.qin.dao.CommentDao;
 import com.qin.entity.Comment;
 import com.qin.entity.User;
@@ -36,6 +37,44 @@ public class CommentService {
 
     public int insert(Comment comment){
         return commentDao.insert(comment);
+    }
+
+    /**
+     * 插入一条评论
+     * @param blogId
+     * @param content
+     * @param userId
+     * @param idx
+     * @param _commentId
+     * @return 成功返回true
+     */
+    public boolean insertComment(Integer blogId, String content, Integer userId, Integer idx, String _commentId){
+        // 创建一个评论
+        Comment comment = new Comment();
+        comment.setBlogId(blogId);
+        comment.setContent(content);
+        comment.setSenderId(userId);
+        comment.setIdx(idx);
+
+        if(idx == 2 && !StringUtils.isNumber(_commentId)){
+            return false;
+        }
+
+        // 如果时二级评论则需要添加额外的信息
+        if(idx == 2 ){
+            int commentId = Integer.parseInt(_commentId);
+            Comment commentById = getCommentById(commentId);
+            User userById = userService.getUserById(commentById.getSenderId());
+
+            // 设置接受评论人的名字
+            comment.setReceiverName(userById.getName());
+            // 设置回复评论的id
+            comment.setCommentId(commentId);
+        }
+
+        insert(comment);
+
+        return true;
     }
 
     /**

@@ -19,6 +19,7 @@ public class BlogVO {
     private String title;
     private String authorName;
     private String description;
+    private Integer commentCount;
     private Boolean isExit;
     private String createTime;
 

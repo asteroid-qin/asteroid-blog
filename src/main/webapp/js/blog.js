@@ -58,7 +58,6 @@ function sender_comment(idx, content, commentId){
     $.post(
         'blog/comment/' + id,
         {
-            '_method':'post',
             'idx':idx,
             'content':content,
             'commentId':commentId

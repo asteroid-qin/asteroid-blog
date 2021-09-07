@@ -59,7 +59,7 @@
     </div>
 
     <!-- 输入内容 -->
-    <textarea id="content" class="form-control" placeholder="编写内容处（使用makedown语法）......"></textarea>
+    <textarea id="content" class="form-control" style="resize: none" placeholder="编写内容处（使用makedown语法）......"></textarea>
     <div class="container-fluid">
         <div class="row">
             <div id="out" class="col-md-8 col-sm-10 mx-auto" style="display: none;"></div>

@@ -9,6 +9,7 @@ import org.springframework.util.DigestUtils;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 @Service
 public class UserService {
@@ -60,4 +61,43 @@ public class UserService {
         return name;
     }
 
+    /**
+     * 注册或者登录账户
+     * @param user
+     * @param name
+     * @param pwd
+     * @param response
+     */
+    public void registeOrLoginUser(User user,String name,String pwd, HttpServletResponse response){
+        // 准备放入编码后的id
+        String digit;
+
+        // 存在需要比对密码
+        if(null != user){
+            // 登录成功,设置用户名id和名字
+            digit = DigestUtils.md5DigestAsHex(user.getId().toString().getBytes());
+        }else{
+            // 不存在则直接创建
+            User u2 = new User(name, pwd);
+            insertUser(u2);
+            digit = DigestUtils.md5DigestAsHex(u2.getId().toString().getBytes());
+        }
+
+        // 把加密后的id和用户名放入cookie中
+        Cookie c1 = new Cookie("digit", digit);
+        Cookie c2 = new Cookie("name", name);
+
+        response.addCookie(c1);
+        response.addCookie(c2);
+    }
+
+    /**
+     * 删除response里面的name和digit
+     * @param response
+     */
+    public void exitUser(HttpServletResponse response){
+        // 删除cookie
+        response.addCookie(new Cookie("name",""));
+        response.addCookie(new Cookie("digit",""));
+    };
 }

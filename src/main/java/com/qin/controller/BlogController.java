@@ -1,20 +1,19 @@
 package com.qin.controller;
 
 import com.alibaba.druid.util.StringUtils;
-import com.qin.entity.Blog;
-import com.qin.entity.Category;
 import com.qin.entity.R;
 import com.qin.entity.User;
 import com.qin.service.BlogService;
-import com.qin.service.CategoryService;
+import com.qin.service.CommentService;
 import com.qin.service.UserService;
 import com.qin.vo.BlogVOWIndex;
+import com.qin.vo.CommentVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
+
+import javax.servlet.http.HttpServletRequest;
+import java.util.List;
 
 @Controller
 public class BlogController {
@@ -22,20 +21,15 @@ public class BlogController {
     @Autowired
     private BlogService blogService;
     @Autowired
-    private UserService userService;
+    private CommentService commentService;
     @Autowired
-    private CategoryService categoryService;
+    private UserService userService;
 
     @RequestMapping("blog/{id}")
-    public String toBlog(@PathVariable("id") String _id){
-        if(StringUtils.isNumber(_id)){
-            int id = Integer.parseInt(_id);
-            // 通过博客的id去查数据库，如果只有1条就正常跳转到blog页面
-            int count = blogService.getCountBlogById(id);
-
-            if(count == 1){
-                return "blog";
-            }
+    public String toBlog(@PathVariable("id") Integer id){
+        // 有且仅有一条记录才能去blog页
+        if(blogService.getCountBlogById(id) == 1){
+            return "blog";
         }
 
         return "/";
@@ -46,23 +40,58 @@ public class BlogController {
     public R getBlog(@RequestParam("id")String _id){
         if(StringUtils.isNumber(_id)){
             int id = Integer.parseInt(_id);
-            // 通过博客的id去查数据库，如果只有1条就正常跳转到blog页面
-            Blog _blog = blogService.getBlogsById(id);
 
-            if(_blog != null){
-                BlogVOWIndex blog = new BlogVOWIndex(_blog);
+            BlogVOWIndex blog = blogService.getBlogPageBlog(id);
 
-                // 为blog设置用户名和分类名
-                User user = userService.getUserById(blog.getAuthorId());
-                blog.setAuthorName(user.getName());
+            return R.ok("已查到博客！", blog);
 
-                Category category = categoryService.getCategoryById(_blog.getCategoryId());
-                blog.setCategoryName(category.getName());
-
-                return R.ok("已查到博客！", blog);
-            }
         }
 
         return R.no(null);
+    }
+
+    @RequestMapping("blog/comment/{id}")
+    @ResponseBody
+    public R getComment(@PathVariable("id")String _id){
+        if(StringUtils.isNumber(_id)){
+            int blogId = Integer.parseInt(_id);
+
+            List<CommentVO> comments = commentService.getCommentByBlogId(blogId);
+
+            return R.ok("返回所有博客的评论！", comments);
+        }
+
+        return R.no(null);
+    }
+
+    @RequestMapping(value = "blog/comment/{id}", method = RequestMethod.POST)
+    @ResponseBody
+    public R insert(@PathVariable("id")Integer blogId,
+                    @RequestParam("idx")String _idx,
+                    @RequestParam("content")String content,
+                    @RequestParam("commentId")String _commentId,
+                    HttpServletRequest request){
+        // 判断当前用户是否合法
+        String name = userService.getUser(request);
+        if(StringUtils.isEmpty(name)){
+            return R.no("用户不合法！", null);
+        }
+
+        // 判断内容是否合法
+        if(StringUtils.isEmpty(content) || content.length() > 255){
+            return R.no("评论内容不合法！", null);
+        }
+
+        User user = userService.getUserByName(name);
+        if(StringUtils.isNumber(_idx)){
+            int idx = Integer.parseInt(_idx);
+
+            boolean flag = commentService.insertComment(blogId, content, user.getId(), idx, _commentId);
+
+            if(flag)
+                return R.ok("发布评论成功！", null);
+        }
+
+        return R.no("数据不合法！",null);
     }
 }

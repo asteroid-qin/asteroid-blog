@@ -35,7 +35,7 @@ $('#m_render').on('click',function(){
 $('#send').on('click', ()=>{
     $.post(
         "blog",
-        {   "_method":"PUT",
+        {
             "title":$('#title').val(),
             "category_id":$('#category option:selected').attr('idx'),
             "content":$('#content').val()

@@ -19,7 +19,9 @@ public class CategoryController {
     @RequestMapping("/categories")
     @ResponseBody
     public R getCategory(){
+        // 查询所有的分类并返回
         List<Category> categories = categoryService.getCategories();
+
         return R.ok(categories);
     }
 }

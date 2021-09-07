@@ -31,11 +31,13 @@ function renderBlog(start, categoryId, size){
             // 拼接描述
             let str5 = '</p></div><small class="me-4">'
             // 拼接用户名
-            let str6 = '</small><small class="me-2"><i class="bi bi-hand-thumbs-up pe-2"></i>0</small><small class="me-2"><i class="bi bi-chat-square-dots pe-2"></i>12</small><small><i class="bi bi-eye pe-2"></i>13</small></div>'
+            let str6 = '</small><small class="me-2"><i class="bi bi-hand-thumbs-up pe-2"></i>0</small><small class="me-2"><i class="bi bi-chat-square-dots pe-2"></i>'
+            // 拼接评论数
+            let str7 = '</small><small><i class="bi bi-eye pe-2"></i>13</small></div>'
 
             // 渲染数据, 往盒子里面添加数据
             $(res.data).each(function (){
-                $('#blog').append(str1+'blog/'+this.id+str2+this.title+str3+this.createTime+str4+this.description+str5+this.authorName+str6)
+                $('#blog').append(str1+'blog/'+this.id+str2+this.title+str3+this.createTime+str4+this.description+str5+this.authorName+str6+this.commentCount+str7)
             })
         }
     )
