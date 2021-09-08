@@ -23,22 +23,6 @@
         <property name="configLocation" value="classpath:mybatis-config.xml"></property>
         <property name="dataSource" ref="ds"></property>
         <property name="mapperLocations" value="classpath:mapper/*Mapper.xml"></property>
-        <property name="plugins">
-            <array>
-                <bean class="com.github.pagehelper.PageInterceptor">
-                    <!-- 这里的几个配置主要演示如何使用，如果不理解，一定要去掉下面的配置 -->
-                    <property name="properties">
-                        <value>
-                            helperDialect=mysql
-                            reasonable=true
-                            supportMethodsArguments=true
-                            params=count=countSql
-                            autoRuntimeDialect=true
-                        </value>
-                    </property>
-                </bean>
-            </array>
-        </property>
     </bean>
     <!-- 把dao接口的实现加入到ioc容器 -->
     <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">

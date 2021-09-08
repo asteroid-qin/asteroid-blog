@@ -7,6 +7,7 @@ import com.qin.entity.Category;
 import com.qin.entity.User;
 import com.qin.vo.BlogVO;
 import com.qin.vo.BlogVOWIndex;
+import com.qin.vo.CommentVO;
 import com.vladsch.flexmark.html.HtmlRenderer;
 import com.vladsch.flexmark.parser.Parser;
 import com.vladsch.flexmark.util.ast.Node;
@@ -14,6 +15,8 @@ import com.vladsch.flexmark.util.data.MutableDataSet;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.servlet.http.HttpServletRequest;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -85,7 +88,24 @@ public class BlogService {
         }
 
         // 包装blog
-        return  blogs.stream().map(blog -> {
+        return getBlogVOS(blogs);
+    }
+
+
+    public List<BlogVO> getHomePageBlogVOs(Integer userId){
+        List<Blog> blogs = getBLogsByUserId(userId);
+
+        // 将blog转成blogvo并返回
+        return getBlogVOS(blogs);
+    }
+
+    /**
+     * 将传入的blog进行封装
+     * @param blogs
+     * @return
+     */
+    private List<BlogVO> getBlogVOS(List<Blog> blogs) {
+        return blogs.stream().map(blog -> {
             BlogVO vo = new BlogVO(blog);
             // 查询作者名字
             User user = userService.getUserById(blog.getAuthorId());
@@ -93,7 +113,9 @@ public class BlogService {
             // 设置描述
             vo.setDescription(getDescription(blog.getContent()));
             // 设置评论数
-            vo.setCommentCount(commentService.getCommentByBlogId(blog.getId()).size());
+            List<CommentVO> comments = commentService.getCommentByBlogId(blog.getId());
+            // 需要计算一级评论及其二级评论的总和
+            vo.setCommentCount(comments.size() + comments.stream().mapToInt(cm->cm.getChildren().size()).sum());
 
             return vo;
         }).collect(Collectors.toList());
@@ -123,6 +145,11 @@ public class BlogService {
         return blogDao.getBlogs();
     }
 
+    /**
+     * 根据用户id查出以时间大小逆序的所有博客
+     * @param userId
+     * @return
+     */
     public List<Blog> getBLogsByUserId(Integer userId){
         return blogDao.getBLogsByUserId(userId);
     }
@@ -139,5 +166,24 @@ public class BlogService {
 
         if(StringUtils.isEmpty(res)) return "";
         return res.substring(0, Math.min(res.length(), 255));
+    }
+
+    /**
+     * 从request中取到user，并返回这个用户的所有博客
+     * @param request
+     * @return
+     */
+    public List<BlogVO> getHomePageBlogVOsByReq(HttpServletRequest request) {
+        // 拿到用户名
+        String name = userService.getUser(request);
+
+        List<BlogVO> blogs = new ArrayList<>();
+        if(!StringUtils.isEmpty(name)){
+            User user = userService.getUserByName(name);
+
+            blogs = getHomePageBlogVOs(user.getId());
+        }
+
+        return blogs;
     }
 }

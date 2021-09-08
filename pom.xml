@@ -94,15 +94,6 @@
       <artifactId>druid</artifactId>
       <version>${druid-version}</version>
     </dependency>
-    <!-- 分页插件 -->
-    <dependency>
-      <groupId>com.github.pagehelper</groupId>
-      <artifactId>pagehelper</artifactId>
-      <version>5.1.2</version>
-    </dependency>
-
-    <!-- 日志框架 -->
-
     <!-- 快速开发 -->
     <dependency>
       <groupId>org.projectlombok</groupId>
@@ -148,7 +139,6 @@
         <scope>provided</scope>
     </dependency>
   </dependencies>
-
   <build>
     <finalName>asteroid-blog</finalName>
     <pluginManagement><!-- lock down plugins versions to avoid using Maven defaults (may be moved to parent pom) -->

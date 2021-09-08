@@ -74,12 +74,12 @@ public class BlogController {
         // 判断当前用户是否合法
         String name = userService.getUser(request);
         if(StringUtils.isEmpty(name)){
-            return R.no("用户不合法！", null);
+            return R.no("当前用户不合法！", null);
         }
 
         // 判断内容是否合法
         if(StringUtils.isEmpty(content) || content.length() > 255){
-            return R.no("评论内容不合法！", null);
+            return R.no("用户"+name+",评论内容不合法！", null);
         }
 
         User user = userService.getUserByName(name);
@@ -89,7 +89,7 @@ public class BlogController {
             boolean flag = commentService.insertComment(blogId, content, user.getId(), idx, _commentId);
 
             if(flag)
-                return R.ok("发布评论成功！", null);
+                return R.ok("用户"+name+",发布评论成功！", null);
         }
 
         return R.no("数据不合法！",null);

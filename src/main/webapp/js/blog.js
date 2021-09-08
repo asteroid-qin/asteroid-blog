@@ -63,10 +63,15 @@ function sender_comment(idx, content, commentId){
             'commentId':commentId
         },
         function(res){
-            console.log(res.message);
+            // 更新日期
+            $('.toast-header > small').text(getSimpleTime())
+            // 更新消息
+            $('.toast-body').text(res.message)
+            // 让toast显示
+            $('.toast').toast('show');
 
+            // 发送请求，从新渲染评论页面
             if(res.code === 200){
-                // 发送请求，从新渲染评论页面
                 render_comment();
             }
         }
@@ -144,7 +149,7 @@ function render_comment(){
 
             // 在这里，给二级评论回复按钮绑定事件
             $('.replay-btn').on('click', function(){
-                console.log("我要回复！！")
+
                 let par =  $(this).parent();
                 $('#comment_card').slideDown()
 

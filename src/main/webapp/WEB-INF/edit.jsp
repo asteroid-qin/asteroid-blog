@@ -31,7 +31,6 @@
     <input class="form-control mt-1 shadow-sm" id="title" type="text" placeholder="请输入博客的标题">
 
     <!-- 两个按钮，从左往右依次是发布、预览 -->
-
     <div class="container-fluid my-3">
         <div class="row justify-content-between">
             <div class="col-md3 col-sm-5 row">

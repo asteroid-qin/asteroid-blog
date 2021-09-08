@@ -26,7 +26,7 @@ public class EditController {
     public String edit(HttpServletRequest request){
         // 如果用户名不存在，则重定向到首页
         String user = userService.getUser(request);
-        if(StringUtils.isEmpty(user)){
+        if(!StringUtils.isEmpty(user)){
             return "edit";
         }
 

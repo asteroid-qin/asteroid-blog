@@ -10,8 +10,6 @@
     <title>用户页</title>
     <base href="<%=url%>">
     <link href="favicon.ico" rel="shortcut icon">
-    <!-- 自定义css -->
-    <link rel="stylesheet" href="css/home.css">
     <!-- 引入bootstrap -->
     <link rel="stylesheet" href="bootstrap/bootstrap.css">
     <!-- 引入bootstrap头像库 -->
@@ -21,6 +19,15 @@
     <script type="text/javascript" src="bootstrap/bootstrap.bundle.js"></script>
     <!-- top导航栏css -->
     <link rel="stylesheet" href="css/top.css">
+    <style>
+        #content a{
+            color: black;
+            text-decoration: none;
+        }
+        #content a:hover{
+            text-decoration: underline;
+        }
+    </style>
 </head>
 <body>
     <!-- 导航栏 -->
@@ -37,10 +44,6 @@
                     <a href="edit" class="ms-2" style="display: none" target="_blank" id="write_blog">写博客</a>
                     <a href="exit" class="ms-2" style="display: none" id="user_exit">退出</a>
                 </ul>
-                <form class="d-flex">
-                    <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-                    <button class="btn btn-outline-success" type="submit">Search</button>
-                </form>
             </div>
         </div>
     </nav>
@@ -77,19 +80,11 @@
     <!-- 个人页 -->
     <div class="container">
       <!-- 头部简单介绍 -->
-      <h3 class="text-center my-3">嘘嘘的小行星</h3>
+      <h3 class="text-center my-3" id="blog_uname"></h3>
       <div class="row justify-content-center">
         <div class="col col-md-2 text-center">
-          <small>1234</small>
-          <p>访问量</p>
-        </div>
-        <div class="col col-md-2 text-center">
-          <small>1234</small>
+          <small id="blog_size"></small>
           <p>文章量</p>
-        </div>
-        <div class="col col-md-2 text-center">
-          <small>1234</small>
-          <p>点赞量</p>
         </div>
       </div>
     </div>
@@ -100,28 +95,15 @@
 
     <!-- 主体内容 -->
     <div class="container">
-        <div class="row text-center" id="bar">
-          <div class="col py-2 position-relative active" onclick="get_blog()">文章<i></i></div>
-          <div class="col py-2 position-relative"  onclick="get_attention()">关注<i></i></div>
+        <div class="row text-center mt-2">
+            <div class="col py-2 position-relative border-bottom border-dark border-2 fw-bold">文章<i></i></div>
         </div>
-        <!-- 有两种可能 -->
-        <!-- 所有文章 -->
-        <div id="blogs" class="row mt-2">
-            <div class="px-3 py-2 border-bottom">
-                <div>
-                  <div class="d-flex w-100 justify-content-between">
-                      <h5 class="mb-1 text-truncate">这是标题这是标题这是标题这是标题这是标题这是标题这是标题</h5>
-                      <small>2012/8/10</small>
-                  </div>
-                  <p class="mb-1 text-truncate">你好啊你好啊你好啊你好啊你好啊你好啊你好啊你好啊你好啊你好啊你好啊你好啊你好啊你好啊你好啊你好啊你好啊你好啊你好啊你好啊你好啊你好啊你好啊你好啊你好啊你好啊你好啊你好啊你好啊你好啊你好啊你好啊你好啊你好啊你好啊你好啊你好啊你好啊你好啊你好啊你好啊你好啊你好啊你好啊你好啊你好啊你好啊你好啊你好啊你好啊你好啊你好啊你好啊你好啊你好啊你好啊你好啊你好啊你好啊你好啊你好啊你好啊你好啊你好啊你好啊你好啊你好啊你好啊你好啊你好啊你好啊</p>
-
-                </div>
-                <small class="me-2"><i class="bi bi-hand-thumbs-up pe-2"></i>0</small>
-                <small class="me-2"><i class="bi bi-chat-square-dots pe-2"></i>12</small>
-                <small><i class="bi bi-eye pe-2"></i>13</small>
-            </div>
-        </div>
+        <!-- 博客分类 -->
+        <!-- 用户分类 -->
+        <!-- 所有用户 -->
+        <div id="content" class="row"></div>
     </div>
+
     <!-- 导入导航栏文件 -->
     <script type="text/javascript" src="js/top.js"></script>
     <!-- 自定义js -->

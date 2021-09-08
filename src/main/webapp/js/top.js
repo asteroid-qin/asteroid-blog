@@ -1,6 +1,45 @@
 /**
- * 用于校验数据合法性
+ * 导航栏的专属js文件，用于校验数据合法性
  */
+
+/**
+ * 传入一个值判断是否是数字
+ * @param val
+ * @returns {boolean}
+ */
+function isRealNum(val){
+    // isNaN()函数 把空串 空格 以及NUll 按照0来处理 所以先去除，
+
+    if(val === "" || val ==null){
+        return false;
+    }
+    if(!isNaN(val)){
+        //对于空数组和只有一个数值成员的数组或全是数字组成的字符串，isNaN返回false，例如：'123'、[]、[2]、['123'],isNaN返回false,
+        //所以如果不需要val包含这些特殊情况，则这个判断改写为if(!isNaN(val) && typeof val === 'number' )
+        return true;
+    }
+
+    else{
+        return false;
+    }
+}
+
+/**
+ * 得到当前格式化后的时间
+ * @returns {string} 格式化后的时间
+ */
+function getSimpleTime(){
+    // 拿到格式化后的时间
+    let now = new Date();
+    let time = now.getHours()+':'
+    time += (now.getMinutes() > 9)?now.getMinutes():'0'+now.getMinutes()
+    time += ':'
+    time += (now.getSeconds() > 9)?now.getSeconds():'0'+now.getSeconds()
+
+    return time;
+}
+
+
 // 得到cookie的函数
 function getCookie(cname) {
     let name = cname + "=";
@@ -91,5 +130,4 @@ $(()=>{
         $('#write_blog').show()
     }
 })
-
 

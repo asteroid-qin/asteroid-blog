@@ -39,7 +39,7 @@
     </select>
 
     <select id="getBLogsByUserId" resultType="com.qin.entity.Blog">
-        select * from blog where author_id = #{userId}  and is_exit = 1
+        select * from blog where author_id = #{userId}  and is_exit = 1 order by create_time desc
     </select>
 
 </mapper>

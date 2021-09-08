@@ -20,6 +20,13 @@
     <script type="text/javascript" src="showdown/showdown.js"></script>
     <link rel="stylesheet"  href="css/top.css">
     <link rel="stylesheet"  href="css/blog.css">
+    <style>
+        .toast{
+            position: fixed;
+            right: 0;
+            top: 40%;
+        }
+    </style>
 </head>
 <body>
     <!-- 导航栏 -->
@@ -36,10 +43,6 @@
                     <a href="edit" class="ms-2" style="display: none" target="_blank" id="write_blog">写博客</a>
                     <a href="exit" class="ms-2" style="display: none" id="user_exit">退出</a>
                 </ul>
-                <form class="d-flex">
-                    <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-                    <button class="btn btn-outline-success" type="submit">Search</button>
-                </form>
             </div>
         </div>
     </nav>
@@ -85,17 +88,10 @@
                 <p>分类:<small id="category" class="ms-2"></small></p>
 
                 <!-- 分割线 -->
-                <div class="border-top mb-1" style="width: 70%;"></div>
+                <div class="border-top mb-1"></div>
 
                 <!-- 博客内容 -->
-                <div id="content"></div>
-
-                <!-- 继续分割线，显示点赞、评论、收藏等信息 -->
-                <div id="inf" class="d-flex justify-content-end p-3 bg-light border-bottom border-4 border-dark">
-                    <small class="me-2"><i class="bi bi-hand-thumbs-up pe-2"></i>0</small>
-                    <small class="me-2"><i class="bi bi-chat-square-dots pe-2"></i>12</small>
-                    <small><i class="bi bi-collection pe-2"></i>13</small>
-                </div>
+                <div id="content" class="py-2 border-bottom border-dark border-5"></div>
 
                 <!-- 评论 -->
                 <div id="comment_top" class="container-fluid my-3">
@@ -119,6 +115,17 @@
                 </div>
             </div>
         </div>
+    </div>
+
+    <!-- 消息框 -->
+    <div class="toast" role="alert" aria-live="assertive" data-bs-autohide="true" aria-atomic="true">
+        <div class="toast-header">
+            <img src="favicon.ico" class="rounded me-2" width="20" height="20" alt="...">
+            <strong class="me-auto">小行星博客</strong>
+            <small class="text-muted"></small>
+            <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+        </div>
+        <div class="toast-body"></div>
     </div>
 
     <!-- 导入导航栏文件 -->

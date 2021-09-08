@@ -36,10 +36,6 @@
                 <a href="edit" class="ms-2" style="display: none" target="_blank" id="write_blog">写博客</a>
                 <a href="exit" class="ms-2" style="display: none" id="user_exit">退出</a>
             </ul>
-            <form class="d-flex">
-              <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-              <button class="btn btn-outline-success" type="submit">Search</button>
-            </form>
           </div>
         </div>
     </nav>

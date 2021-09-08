@@ -14,7 +14,7 @@ function renderBlog(start, categoryId, size){
         {
             "start":start,
             "size":size,
-            "categoryId":categoryId
+            "categoryId":categoryId,
         },
         function(res){
             // 先清空
@@ -31,9 +31,9 @@ function renderBlog(start, categoryId, size){
             // 拼接描述
             let str5 = '</p></div><small class="me-4">'
             // 拼接用户名
-            let str6 = '</small><small class="me-2"><i class="bi bi-hand-thumbs-up pe-2"></i>0</small><small class="me-2"><i class="bi bi-chat-square-dots pe-2"></i>'
+            let str6 = '</small><small class="me-2"><i class="bi bi-chat-square-dots pe-2"></i>'
             // 拼接评论数
-            let str7 = '</small><small><i class="bi bi-eye pe-2"></i>13</small></div>'
+            let str7 = '</small></div>'
 
             // 渲染数据, 往盒子里面添加数据
             $(res.data).each(function (){
@@ -126,4 +126,5 @@ $(()=>{
         renderBlog((idx - 1) * PAGE_SIZE, categoryId, PAGE_SIZE)
         renderPagination(categoryId)
     })
+
 })
